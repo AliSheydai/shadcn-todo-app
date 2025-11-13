@@ -2,9 +2,10 @@
 import axios from "axios"
 
 // ساخت یک instance از axios برای درخواست‌ها
-const api = axios.create({
-  baseURL: "http://localhost:3000/api", // مسیر اصلی API
-})
+// Use environment variable when provided (e.g., for external API or preview),
+// otherwise use relative path so client and server requests target the same origin
+const baseURL = process.env.NEXT_PUBLIC_API_URL || "/api"
+const api = axios.create({ baseURL })
 
 // 🟢 دریافت همه‌ی Todos
 export const getTodos = async () => {
